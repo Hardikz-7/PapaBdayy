@@ -1,0 +1,190 @@
+/* Background */
+body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(270deg, #ff0080, #ff8c00, #40e0d0, #8a2be2, #ff0080);
+    background-size: 1000% 1000%;
+    animation: rainbowBG 20s linear infinite;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Arial Black', sans-serif;
+  }
+  
+  /* Rainbow glowing border container */
+  .glow-border {
+    padding: 30px 50px;
+    border: 12px solid;
+    border-image: linear-gradient(45deg, red, orange, yellow, green, blue, indigo, violet, red);
+    border-image-slice: 1;
+    animation: glowBorder 5s linear infinite;
+    border-radius: 25px;
+    box-shadow: 0 0 40px rgba(255, 255, 255, 0.8);
+    z-index: 10;
+  }
+  
+  /* Text Style */
+  h1 {
+    font-size: 5rem;
+    color: white;
+    text-shadow: 0 0 15px #fff,
+                 0 0 30px #ff00ff,
+                 0 0 45px #00ffff;
+    animation: pulse 1.5s ease-in-out infinite;
+    margin: 0;
+    text-align: center;
+  }
+  
+  /* Balloons */
+  .balloon-container {
+    position: absolute;
+    bottom: -120px;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    z-index: 0;
+  }
+  
+  .balloon {
+    width: 60px;
+    height: 80px;
+    background: radial-gradient(circle at 30% 30%, #ff4d4d, #c0392b);
+    border-radius: 50% 50% 50% 50%;
+    position: relative;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  .balloon::after {
+    content: '';
+    position: absolute;
+    bottom: -30px;
+    left: 50%;
+    width: 2px;
+    height: 35px;
+    background: #555;
+  }
+  
+  .balloon:nth-child(2) {
+    background: radial-gradient(circle at 30% 30%, #8e44ad, #5e3370);
+    animation-delay: 2s;
+  }
+  .balloon:nth-child(3) {
+    background: radial-gradient(circle at 30% 30%, #3498db, #2c3e50);
+    animation-delay: 4s;
+  }
+  .balloon:nth-child(4) {
+    background: radial-gradient(circle at 30% 30%, #f1c40f, #f39c12);
+    animation-delay: 1s;
+  }
+  .balloon:nth-child(5) {
+    background: radial-gradient(circle at 30% 30%, #2ecc71, #27ae60);
+    animation-delay: 3s;
+  }
+  
+  /* Animations */
+  @keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+  }
+  
+  @keyframes glowBorder {
+    0% {
+      border-image-source: linear-gradient(0deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+    100% {
+      border-image-source: linear-gradient(360deg, red, orange, yellow, green, blue, indigo, violet);
+    }
+  }
+  
+  @keyframes float {
+    0% {
+      transform: translateY(0) rotate(0deg);
+      opacity: 0;
+    }
+    10% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-120vh) rotate(360deg);
+      opacity: 0;
+    }
+  }
+  
+  @keyframes rainbowBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+  
+  .datetime-container {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    background: rgba(0,0,0,0.4);
+    padding: 20px;
+    border-radius: 15px;
+    text-align: center;
+    color: #fff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.6);
+    border: 2px solid;
+    border-image: linear-gradient(45deg, cyan, magenta, yellow, cyan) 1;
+    font-family: 'Courier New', Courier, monospace;
+  }
+  
+  .datetime-container .date {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .datetime-container .clock {
+    font-size: 1.6rem;
+    letter-spacing: 2px;
+  }
+  #matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -2;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .floating-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4rem;
+    font-weight: bold;
+    color: #00ff00;
+    opacity: 0;
+    animation: floatLove 6s infinite ease-in-out;
+    text-shadow: 0 0 20px #0f0, 0 0 40px #0f0;
+    z-index: 10;
+  }
+  
+  @keyframes floatLove {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+    25% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    50% { opacity: 0.8; transform: translate(-50%, -50%) scale(1.1); }
+    75% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+  }
+  .floating-text {
+    position: fixed;
+    top: 70%; /* Was 50%, now pushed down */
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #00ff00;
+    opacity: 0;
+    animation: floatLove 6s infinite ease-in-out;
+    text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 40px #0f0;
+    z-index: 9999;
+    pointer-events: none;
+  }
+  
